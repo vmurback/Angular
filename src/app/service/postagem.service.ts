@@ -21,10 +21,22 @@ export class PostagemService {
   return this.http.get<Postagem[]>('https://vferminbp.herokuapp.com/postagem', this.token)
 }
 
-postPostagem(postagem:Postagem): Observable<Postagem>{
+getByIdPostagem(id: number): Observable<Postagem>{
+  return this.http.get<Postagem>(`https://vferminbp.herokuapp.com/postagem/${id}`, this.token)
+}
+
+postPostagem(postagem: Postagem): Observable<Postagem>{
 return this.http.post<Postagem>('https://vferminbp.herokuapp.com/postagem', postagem, this.token)
 
+}
 
+putPostagem(postagem: Postagem): Observable<Postagem>{
+return this.http.put<Postagem>('https://vferminbp.herokuapp.com/postagem', postagem, this.token)
+
+}
+
+deletePostagem(id: number){
+  return this.http.delete(`https://vferminbp.herokuapp.com/postagem/${id}`, this.token)
 }
 
 }
