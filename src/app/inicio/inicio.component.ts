@@ -19,10 +19,12 @@ export class InicioComponent implements OnInit {
 
   postagem: Postagem = new Postagem()
   listaPostagens: Postagem[]
+  tituloPost: String
 
   tema: Tema = new Tema()
   listaTemas: Tema[]
   idTema: number
+  nomeTema: String
 
   user: User = new User()
   idUser = environment.id
@@ -55,7 +57,6 @@ export class InicioComponent implements OnInit {
   getAllTemas() {
     this.temaService.getAllTema().subscribe((resp: Tema[]) => {
       this.listaTemas = resp
-
     })
 
   }
@@ -63,23 +64,19 @@ export class InicioComponent implements OnInit {
   findByIdTema() {
     this.temaService.getByIdTema(this.idTema).subscribe((resp: Tema) => {
       this.tema = resp
-
     })
   }
 
   getAllPostagens() {
     this.postagemService.getAllPostagens().subscribe((resp: Postagem[]) => {
       this.listaPostagens = resp
-
     })
   }
 
   findByIdUser() {
     this.authService.getByIdUser(this.idUser).subscribe((resp: User) => {
       this.user = resp
-
     })
-
   }
 
   publicar() {
@@ -95,7 +92,26 @@ export class InicioComponent implements OnInit {
       this.postagem = new Postagem()
       this.getAllPostagens()
     })
-
   }
 
+  findByTituloPostagem() {
+
+    if (this.tituloPost = '') {
+      this.getAllPostagens()
+    } else {
+      this.postagemService.getByTituloPostagem(this.tituloPost).subscribe((resp: Postagem[]) => {
+        this.listaPostagens = resp
+      })
+    }
+  }
+
+  findByNomeTema() {
+    if (this.nomeTema = '') {
+      this.getAllTemas()
+    } else {
+      this.temaService.getByNomeTema(this.nomeTema).subscribe((resp: tema[]) => {
+        this.listaTemas = resp
+      })
+    }
+  }
 }
