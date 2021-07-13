@@ -18,7 +18,7 @@ import { TemaService } from '../service/tema.service';
 export class InicioComponent implements OnInit {
 
   postagem: Postagem = new Postagem()
-listaPostagens: Postagem[]
+  listaPostagens: Postagem[]
 
   tema: Tema = new Tema()
   listaTemas: Tema[]
@@ -26,6 +26,10 @@ listaPostagens: Postagem[]
 
   user: User = new User()
   idUser = environment.id
+
+  key = 'data'
+  reverse = true
+
   constructor(
 
     private router: Router,
@@ -40,7 +44,7 @@ listaPostagens: Postagem[]
 
 
   ngOnInit() {
-    window.scroll(0,0)
+    window.scroll(0, 0)
 
     if (environment.token == '') {
       this.router.navigate(['/entrar'])
@@ -63,20 +67,20 @@ listaPostagens: Postagem[]
     })
   }
 
-getAllPostagens(){
-  this.postagemService.getAllPostagens().subscribe((resp:Postagem[])=>{
-this.listaPostagens = resp
+  getAllPostagens() {
+    this.postagemService.getAllPostagens().subscribe((resp: Postagem[]) => {
+      this.listaPostagens = resp
 
-  })
-}
+    })
+  }
 
-findByIdUser(){
-this.authService.getByIdUser(this.idUser).subscribe((resp: User)=>{
-this.user = resp
+  findByIdUser() {
+    this.authService.getByIdUser(this.idUser).subscribe((resp: User) => {
+      this.user = resp
 
-})
+    })
 
-}
+  }
 
   publicar() {
     this.tema.id = this.idTema
